@@ -48,6 +48,13 @@ if(BUILD_TESTING)
   )
   target_link_libraries(test_differential_transmission transmission_interface)
 
+  foreach(include_order IN ITEMS simple_first differential_first)
+    ament_add_gmock(test_transmission_headers_${include_order}
+      test/transmission_headers_${include_order}_test.cpp
+    )
+    target_link_libraries(test_transmission_headers_${include_order} transmission_interface)
+  endforeach()
+
   ament_add_gmock(test_four_bar_linkage_transmission
     test/four_bar_linkage_transmission_test.cpp
   )
